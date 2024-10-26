@@ -18,7 +18,7 @@ function Footer() {
 <ul className='mt-5 font-normal cursor-pointer'>
     <li onClick={()=>{navigate('/');scrollTo(0,0)}}>Home</li>
     <li onClick={()=>{navigate('/about') ; scrollTo(0,0)}}>About us</li>
-    <li>Delivery</li>
+    <li>More About US</li>
     <li>Privacy policy</li>
 </ul>
    </div>
@@ -37,7 +37,7 @@ function Footer() {
           
     
         {/* copywright */}
-        <div className= ' flex items-center justify-center mb-2'><hr /><p className='  text-gray-600'>Copyright 2024 @ Ratnesh.Dev - All Right Reserved.</p>
+        <div className= ' flex items-center justify-center mb-2'><hr /><p className='  text-gray-600'>Copyright 2024 @Ratnesh.Dev - All Right Reserved.</p>
         </div>
    </div>
   )
