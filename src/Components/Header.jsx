@@ -3,7 +3,7 @@ import { assets } from '../assets/assets_frontend/assets'
 
 function Header() {
   return (
-    <div className='flex md:flex-row   flex-wrap rounded-md items-center justify-between px-5 md:px-10 lg-px-20  bg-primary mt-10  '>
+    <div className='flex md:flex-row   flex-wrap rounded-md items-center justify-between px-5 md:px-10 lg-px-20  bg-primary    '>
         {/* //left side */}
         <div className='md:w-1/2  flex flex-col items-start justify-center gap-4 py-10 m-auto md:py-[10vw] md:mb-[-30px] '>
         <p className='text-3xl md:text-4xl capitalize text-white font-semibold leading-tight md:leading-tight lg:leading-tight '>

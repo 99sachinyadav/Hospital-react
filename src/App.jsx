@@ -13,30 +13,22 @@ import Footer from "./Components/Footer";
 import 'remixicon/fonts/remixicon.css'
 import Chatbot from "./Components/Chatbot";
  
-import Chaticon from './assets/assets_admin/Chaticon.png';
+
  
 
 function App() {
-   const navigate = useNavigate();
-   const [open, setopen] = useState(true)
-    const location = useLocation();
- useEffect(() => {
-    if (location.pathname === "/chatbot") {
-      setopen(false);
-    } else {
-      setopen(true);
-    }
-  }, [location.pathname]); 
+  //  const navigate = useNavigate();
+    
+ 
+ 
   return (
     <>
       <div className=" mx-4 sm:mx-[10%]  ">
 
-          <div onClick={()=>{navigate('/chatbot'),setopen(false)}} className={` sticky top-[800px] flex items-center justify-center  w-24 h-24 bottom-[200px] rounded-full ${open?"block":"hidden"}  ml-auto mr-[-100px] z-50`}>
-     <img  className="w-30 h-30" src={Chaticon} alt="" />
-  </div>
+     
          <Navbar/>
         <Routes>
-            <Route path="/chatbot" element={<Chatbot setopen={setopen}/>} />
+            <Route path="/chatbot" element={<Chatbot  />} />
           <Route path="/" element={<Home />} />
           <Route path="/doctors" element={<Doctors />} />
           <Route path="/doctors/:speciality" element={<Doctors />} />

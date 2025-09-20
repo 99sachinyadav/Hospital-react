@@ -2,41 +2,24 @@ import { useEffect, useState } from "react";
 
 const Typewriter = ({ message = "", onDone }) => {
   const [displayedText, setDisplayedText] = useState("");
-  const [lineIndex, setLineIndex] = useState(0);
-
-  const lines = message.split("\n");
 
   useEffect(() => {
-    if (lineIndex >= lines.length) {
-      if (onDone) onDone();
-      return;
-    }
-
-    let charIndex = 0;
-    const line = lines[lineIndex];
+    setDisplayedText(""); // reset
+    let i = 0;
     const interval = setInterval(() => {
-      if (charIndex <= line.length) {
-        setDisplayedText((prev) => {
-          const currentLines = prev.split("\n");
-          currentLines[lineIndex] = line.slice(0, charIndex);
-          return currentLines
-            .concat(lines.slice(lineIndex + 1).map(() => ""))
-            .join("\n");
-        });
-        charIndex++;
-      } else {
+      setDisplayedText(message.slice(0, i + 1));
+      i++;
+      if (i === message.length) {
         clearInterval(interval);
-        setTimeout(() => {
-          setLineIndex((prev) => prev + 1);
-        }, 400); // Pause before next line
+        onDone?.();
       }
-    }, 30); // Typing speed
+    }, 30);
 
     return () => clearInterval(interval);
-  }, [lineIndex]);
+  }, [message]); // restart on new message
 
   return (
-    <pre style={{ whiteSpace: "pre-wrap", fontFamily: "monospace" ,fontSize:"1.2rem"}}>
+    <pre style={{ whiteSpace: "pre-wrap", fontFamily: "monospace", fontSize: "1.2rem" }}>
       {displayedText}
     </pre>
   );

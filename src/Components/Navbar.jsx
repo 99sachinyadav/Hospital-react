@@ -6,13 +6,13 @@ function Navbar() {
   const [showmenu, setshowmenu] = useState(false);
   const [token, settoken] = useState(true);
   return (
-    <div className="flex items-center justify-between  w-full  mt-3  ">
+    <div className="flex items-center justify-between  w-full   mt-[-30px]">
       <img
         onClick={() => {
           navigate("/");
         }}
-        className="w-44 cursor-pointer"
-        src={assets.logo}
+        className="w-40  cursor-pointer"
+        src={assets.medisarthi}
         alt="logo"
       />
       <ul className="hidden md:flex items-center justify-between gap-5 font-medium">

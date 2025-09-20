@@ -1,30 +1,32 @@
-import { useState } from "react";
+import {  useState } from "react";
 import { GoogleGenAI } from "@google/genai";
  import Typewriter from "./TypeWriter";
-const Chatbot = ({setopen}) => {
+  import { useRef } from "react";
+const Chatbot = ( ) => {
   const [chatInput, setChatInput] = useState("");
   const [conversation, setConversation] = useState([]);
   
-  const History = [];
+ 
+  const historyRef = useRef([]);
   const ai = new GoogleGenAI({
-    apiKey: "AIzaSyDluhdtQ2JCNrs2veiomYgdy1FCEGUbBRA",
+    apiKey: "AIzaSyAS2BrUOqaFVFSVhvfapY7FEaP_8moSSqw",
   });
   const chatbotReply = async (userProblem) => {
-    History.push({
+    historyRef.current.push({
       role: "user",
       parts: [{ text: userProblem }],
     });
 
     const response = await ai.models.generateContent({
       model: "gemini-2.0-flash",
-      contents: History,
+      contents: historyRef.current,
       config: {
         systemInstruction: `you are a   medicine suggester for desieses asked to you and coding  instructer
        and you will give answer only to those problem which are related to medicine or health
           if someone ask you question which is not relate to coading  or data
            you will say "I am a chatbot for medicine and health related queries only, please ask me something related to health or medicine.
              i am giving  you some medicine with there uses and side effect as well as doses give your answer based upon it  you can use it for your problem but i am not a doctor so please consult a doctor before taking any medicine say in last
-        and please keep your answer crisp short and to the point  give your responce in following pattern
+        and please keep your answer crisp short and to the point  give your responce in following pattern and you have to give answer in the language in which user asking you the question if someone asking answer in hindi then you have to write answer in in hindi language donot hinglish
           
         Here is a structured list of commonly used medicines for stomach pain, including their name, uses, dosage, and side effects:
 🟢 1. Dicyclomine
@@ -114,7 +116,7 @@ Pseudoephedrine nasal congestion; 60mg h; insomnia, increased blood pressure
       },
     });
 
-    History.push({
+    historyRef.current.push({
       role: "model",
       parts: [{ text: response.text }],
     });
@@ -124,21 +126,26 @@ Pseudoephedrine nasal congestion; 60mg h; insomnia, increased blood pressure
     return response.text;
   };
 
-  const handleSend = async (e) => {
+
+    
+    const handleSend = async (e) => {
     e.preventDefault();
     if (chatInput.trim() === "") return;
 
     // Add the message to the array
-    setConversation((prevMessages) => [...prevMessages,{role:"user",talk:chatInput}]);
-
-    const botreply = await chatbotReply(chatInput);
-
-     setConversation((prevreply)=>[...prevreply,{role:"bote",talk:botreply}])
-    
-  console.log(conversation)
-  
+    setConversation((prevMessages) => [...prevMessages, { id:crypto.randomUUID(), role: "user", talk: chatInput }]);
+    // console.log(`user ->${chatInput}`);
+    try {
+      const botreply = await chatbotReply(chatInput);
+      // console.log(`bot ->${botreply}`);
+      setConversation((prevreply) => [...prevreply, { id: crypto.randomUUID(), role: "bot", talk: botreply }]);
+    } catch (error) {
+      console.error("Error getting bot reply:", error);
+    }
+    console.log("conversation", conversation);
     setChatInput("");
   };
+ 
 
 
   return (
@@ -150,19 +157,22 @@ Pseudoephedrine nasal congestion; 60mg h; insomnia, increased blood pressure
     conversation.map((msg, index) => {
       if (msg.role === "user") {
         return (
-          <div key={index} className="text-right mb-2">
-       
+          <div key={msg.id+msg.talk} className="text-right mb-2">
+                    
             <div className="bg-blue-100 p-2 rounded-lg inline-block">
+                {/* { msg.talk+msg.id } */}
               {msg.talk}
             </div>
           </div>
         );
       } else {
         return (
-          <div key={index} className="text-left mb-2 max-w-3xl">
-
+          <div key={msg.id+msg.talk} className="text-left mb-2 max-w-3xl">
+                        
            <div className="">
-                <Typewriter className="bg-blue-100 p-2 rounded-lg" key={index} message={msg.talk} />
+            {/* {msg.talk}  */}
+                <Typewriter className="bg-blue-100 p-2 rounded-lg" key={msg.id+msg.talk} message={msg.talk} />
+                
            </div>
           </div>
         );
