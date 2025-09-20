@@ -1,6 +1,6 @@
 import {  useState } from "react";
 import { GoogleGenAI } from "@google/genai";
- import Typewriter from "./TypeWriter";
+ import Typewriter from "./Typewriter";
   import { useRef } from "react";
 const Chatbot = ( ) => {
   const [chatInput, setChatInput] = useState("");
@@ -188,7 +188,7 @@ Pseudoephedrine nasal congestion; 60mg h; insomnia, increased blood pressure
           type="text"
           value={chatInput}
           onChange={(e) => setChatInput(e.target.value)}
-          className="flex-1 border border-gray-300 rounded-l px-4 py-2 focus:outline-none"
+          className=" w-full sm:flex-1 border border-gray-300 rounded-l px-4 py-2 focus:outline-none"
           placeholder="Type your message..."
         />
         <button

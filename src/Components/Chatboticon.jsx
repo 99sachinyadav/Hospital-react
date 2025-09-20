@@ -14,7 +14,7 @@ const Chatboticon = () => {
     }
   }, [location.pathname]); 
   return (
-         <div onClick={()=>{navigate('/chatbot'),setopen(false)}} className={` sticky top-[620px] flex items-center justify-center  w-24 h-24   rounded-full ${open?"block":"hidden"}  ml-auto mr-[-100px] z-50`}>
+         <div onClick={()=>{navigate('/chatbot'),setopen(false)}} className={` sticky top-[620px] flex items-center justify-center  w-24 h-24   rounded-full ${open?"block":"hidden"}  ml-auto mr-[-20px] sm:mr-[-150px] z-50`}>
      <img  className="w-30 h-30" src={Chaticon} alt="" />
   </div>
   )
