@@ -1,6 +1,6 @@
 import {  useState } from "react";
 import { GoogleGenAI } from "@google/genai";
- import Typewriter from "./TypeWriter";
+ import Typewriter from "./Typewriter";
   import { useRef } from "react";
 const Chatbot = ( ) => {
   const [chatInput, setChatInput] = useState("");
